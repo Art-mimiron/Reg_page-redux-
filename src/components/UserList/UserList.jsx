@@ -2,14 +2,45 @@ import React from 'react'
 //import component
 import Searchbar from '../Searchbar/Searchbar'
 import {connect} from 'react-redux';
+import searchResults from '../../selectors/searchBarSelector'
 import * as actions from '../../actions/actions'
 
-const UserList = ({users, searchQuery, removeUser}) => {
+const UserList = ({users, joke, removeUser, getJoke}) => {
 
     return(
-        
-        <>
-            <Searchbar searchQuery={searchQuery} />
+        <div className='UserList-Inner'>
+            <Searchbar />
+            <div className="UserList-Wrapper UserList-Wrapper_chuck" key={'ChuckNorris'}>
+                <div className="UserList-Avatar UserList-Avatar_chuck">
+                    <img src='./chuck.jpg' alt="" className="UserList-Photo UserList-Photo_chuck"/>
+                </div>
+                <div className={joke.IsLoading ? "UserList-Info UserList-Info_chuck UserList-Info_chuckLoading" : "UserList-Info UserList-Info_chuck"}>
+                    <div className="UserList-ChuckCard">
+                        <div className='UserList-ChuckInfo'>
+                        <div className="UserList-About">
+                                <div className="UserList-Details">
+                                    <div className="UserList-Name">
+                                        Chuck Norris
+                                    </div>
+                                    <div className="UserList-Gender">
+                                        Male
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="UserList-Descr">
+                                <div className="UserList-Registration">
+                                    Right after big bang
+                                    <span className='UserList-Date'>Registration date</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="UserList-ChuckJoke">
+                        {joke.Joke}
+                        </div>
+                    </div>
+                    <button className="UserList-Remove UserList-Remove_chuck" onClick={getJoke}>What?</button>
+                </div>
+            </div>
             <ul className='UserList'>
             {users.map((item) => {
                     return(
@@ -42,7 +73,7 @@ const UserList = ({users, searchQuery, removeUser}) => {
                                         Loyalty
                                     </div>
                                     <div className="UserList-Coupone">
-                                        {item.loyaltyCode}
+                                        {item.loyaltyCode ? item.loyaltyCode : 'None' }
                                         <span className='UserList-Code'>Coupone code</span>
                                     </div>
                                     
@@ -53,13 +84,14 @@ const UserList = ({users, searchQuery, removeUser}) => {
                     )
                 })}
             </ul>
-        </>
+        </div>
     )
 };
 
 const mapStateToProps = (state) => {
     return {
-        users: state.usersData,
+        users: searchResults(state),
+        joke: state.chuckJokes
     }
 }
 

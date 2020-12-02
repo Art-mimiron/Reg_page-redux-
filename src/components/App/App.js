@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Switch, Route, Redirect} from "react-router-dom";
 import {connect} from 'react-redux';
+import * as actions from '../../actions/actions'
 
 import './App.sass';
-
-
 
 
 //import components
@@ -15,64 +14,23 @@ import UserList from '../UserList/UserList'
 import Navigation from '../Navigation/Navigation'
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      users : [],
-      searchQuery: ''
-    }
-    this.maxId = 0;
-    
-  }
-
-  
-
-  //local store
+ 
+  //local store + generation of joke
   componentDidMount = () => {
     if (localStorage.getItem('users') !== null) {
-      const localUsers = JSON.parse(localStorage.getItem('users'))
-      this.setState(() => {
-        return {users: localUsers}
-      });
-      this.maxId = JSON.parse(localStorage.getItem('id'))
+      this.props.getLocalUsers(JSON.parse(localStorage.getItem('users')))
     } else {
       localStorage.setItem('users', JSON.stringify([]))
     }
+    this.props.getJoke()
   };
-  
-
 
   componentDidUpdate = () => {
-    localStorage.setItem('users', JSON.stringify(this.state.users))
-    localStorage.setItem('id', JSON.stringify(this.maxId))
+    localStorage.setItem('users', JSON.stringify(this.props.state))
   }
   
- 
-  //functions
-
-
-    
-  searchQuery = (searchQuery) => {
-    this.setState({searchQuery})
-  }
-
-  searchResults = (users, searchQuery) => {
-    if (searchQuery.length === 0) {
-        return users;
-    }
-
-    return users.filter((users) => {
-        return JSON.stringify(users).toLowerCase().indexOf(searchQuery) > -1;
-    })
-}
-
-  //render
   
   render () {
-    const {users, searchQuery} = this.state
-    const visibleUsers = this.searchResults(users, searchQuery)
-    
-    
     return (
       <>
         <Router>
@@ -84,7 +42,7 @@ class App extends Component {
                 <About />
               </Route>
               <Route path="/User_list">
-                <UserList searchQuery={this.searchQuery} />
+                <UserList />
               </Route>
               <Route path="/New_user">
                 <Registration/>
@@ -99,4 +57,8 @@ class App extends Component {
   }
 }
 
-export default connect()(App);
+const mapStateToProps = (state) => ({
+  state: state.usersData
+});
+
+export default connect(mapStateToProps, actions)(App);
