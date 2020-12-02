@@ -18,7 +18,24 @@
             width: 430px
             font-size: 13px
     .UserList
-        margin: 0 7%
+        &-Inner
+            margin: 0 7%
+        &-Info
+            &_chuck
+                &:hover
+                    width: 445px
+        &-ChuckJoke
+            width: 165px
+            font-size: 10px
+            line-height: 13px
+        &-Remove
+            &_chuck
+                left: 395px
+                height: 25px
+                width: 45px
+                font-size: 11px
+                &_load
+                    width: 30px
     .Registration
         &-Picture
             width: 350px
@@ -88,11 +105,23 @@
             align-items: flex-start
             flex-direction: column
             width: 380px
+            &_chuck
+                left: 50%
+                transform: translateX(-50%)
+                bottom: -100px
         &-Avatar
             z-index: 1
         &-Info
             width: 380px
             transform: translateY(-12px)
+            &_chuck
+                &:hover
+                    width: 380px
+        &-ChuckInfo
+            width: 175px
+        &-Remove
+            &_chuck
+                left: 330px
     .Searchbar
         margin: 0 auto
     .About
@@ -107,7 +136,7 @@
     body
         padding-top: 25px
     .UserList
-        margin-bottom: 100px
+        margin-bottom: 170px
     .Registration
         margin-top: 80px
     .Navigation
@@ -142,12 +171,24 @@
             color: #DEDEDE
         &-Remove
             left: 300px
+            &_chuck
+                left: 270px
+                height: 20px
+                &_load
+                    width: 20px
+                    min-height: 20px
+                    font-size: 0
         &-Info
             width: 320px
             &:hover
                 width: 320px
         &-Wrapper
             width: 320px
+        &-ChuckInfo
+            width: 145px
+        &-ChuckJoke
+            width: 155px
+        
     .About
         &-Picture
             height: 350px
