@@ -97,11 +97,22 @@
         left: 360px
         &_chuck
             left: 680px
-            border-radius: 22%
             width: 60px
             height: 30px
             border: 1px solid #dedede59
             color: #DEDEDE
+            transition: 0.2s all ease
+            &_load
+                font-size: 0px
+                width: 30px
+                min-height: 30px
+                margin-left: 15px
+                padding: 0
+                border-radius: 50%
+                border: 1px solid #dedede59
+                border-left-color: transparent
+                animation: rotate .8s ease 0.5s infinite
+                pointer-events: none
     &-Trash
         width: 15px
     &-ChuckInfo
@@ -122,3 +133,9 @@
         width: 735px
         display: flex
         align-items: center
+
+
+@keyframes rotate 
+    0%
+        transform: rotate(360deg)
+    

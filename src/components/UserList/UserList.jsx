@@ -14,7 +14,7 @@ const UserList = ({users, joke, removeUser, getJoke}) => {
                 <div className="UserList-Avatar UserList-Avatar_chuck">
                     <img src='./chuck.jpg' alt="" className="UserList-Photo UserList-Photo_chuck"/>
                 </div>
-                <div className={joke.IsLoading ? "UserList-Info UserList-Info_chuck UserList-Info_chuckLoading" : "UserList-Info UserList-Info_chuck"}>
+                <div className="UserList-Info UserList-Info_chuck">
                     <div className="UserList-ChuckCard">
                         <div className='UserList-ChuckInfo'>
                         <div className="UserList-About">
@@ -38,7 +38,7 @@ const UserList = ({users, joke, removeUser, getJoke}) => {
                         {joke.Joke}
                         </div>
                     </div>
-                    <button className="UserList-Remove UserList-Remove_chuck" onClick={getJoke}>What?</button>
+                    <button className={joke.IsLoading ? "UserList-Remove UserList-Remove_chuck UserList-Remove_chuck_load" : "UserList-Remove UserList-Remove_chuck"} onClick={getJoke}>what?</button>
                 </div>
             </div>
             <ul className='UserList'>

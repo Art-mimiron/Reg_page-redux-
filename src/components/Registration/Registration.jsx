@@ -90,8 +90,7 @@ class Registration extends Component {
                             name='loyaltyProgram' 
                             id='loyaltyProgram' 
                             value={this.props.state.loyaltyProgram} 
-                            onChange={(e) => this.props.newUser(e)} 
-                            onClick={this.props.loyaltyCodeReset} />
+                            onClick={(e) => this.props.newUser(e)}/>
                             <label className='Registration-Label' htmlFor='loyaltyProgram'><span>LOYALTY CODE?</span></label>
                         </li>
                         <li className={this.props.state.loyaltyProgram ? 'Registration-Promo Registration-Promo_active' : 'Registration-Promo'}>
